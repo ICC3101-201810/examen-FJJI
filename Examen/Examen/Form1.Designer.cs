@@ -64,7 +64,6 @@
             this.TNombreUsuario.Name = "TNombreUsuario";
             this.TNombreUsuario.Size = new System.Drawing.Size(343, 38);
             this.TNombreUsuario.TabIndex = 2;
-            this.TNombreUsuario.TextChanged += new System.EventHandler(this.TNombreUsuario_TextChanged);
             // 
             // BotonIngresar
             // 

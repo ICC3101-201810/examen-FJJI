@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace Examen
 {
@@ -19,17 +20,13 @@ namespace Examen
         public Form1()
         {
             InitializeComponent();
-            puntajes.Items.Add(0 + "\t" + "prueba");
+            puntajes.Items.Add(0 + " puntos,\t nombre: " + "prueba" +" \t Tiempo: "+ "9999999");
+            intro();
         }
 
         private void BotonSalir_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void TNombreUsuario_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void BotonIngresar_Click(object sender, EventArgs e)
@@ -59,7 +56,7 @@ namespace Examen
                 }
                 this.Show();
                 //abre juego
-
+                intro();
                 foreach (object item in puntajes.Items)
                 {
                     string[] separados = item.ToString().Split(new char[0]);
@@ -74,7 +71,7 @@ namespace Examen
                 }
                 if (contadorPuntajes < 10)
                 {
-                    puntajes.Items.Add(juego.puntaje() + "\t" + TNombreUsuario.Text);
+                    puntajes.Items.Add(juego.puntaje() + " puntos,\t nombre: " + TNombreUsuario.Text + " \t Tiempo: " + juego.timepo());
                     contadorPuntajes = 0;
                     if (puntajes.Items.Count > 10)
                     {
@@ -104,9 +101,9 @@ namespace Examen
                                 break;
                             }
                         }
-                        TNombreUsuario.Text = "";
-                        return;
                     }
+                    TNombreUsuario.Text = "";
+                    return;
                 }
             }
         }
@@ -114,6 +111,11 @@ namespace Examen
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+        private void intro()
+        {
+            SoundPlayer simpleSound = new SoundPlayer(@"..\..\..\..\start-pacman.wav");
+            simpleSound.Play();
         }
     }
 }

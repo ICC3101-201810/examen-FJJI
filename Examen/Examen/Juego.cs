@@ -11,7 +11,7 @@ using System.Media;
 
 namespace Examen
 {
-    public partial class Juego : Form, Ipuntaje
+    public partial class Juego : Form, Ipuntaje, ITiempo
     {
         int puntos = 0;
         int tiempo = 0;
@@ -225,6 +225,14 @@ namespace Examen
         {
             SoundPlayer simpleSound = new SoundPlayer(@"..\..\..\..\pacman-die.wav");
             simpleSound.Play();
+        }
+        public int timepo()
+        {
+            return tiempo;
+        }
+        int ITiempo.tiempo()
+        {
+            return tiempo;
         }
     }
 }
