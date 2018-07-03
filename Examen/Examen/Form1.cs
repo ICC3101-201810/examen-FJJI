@@ -15,6 +15,7 @@ namespace Examen
         bool ver = false;
         Juego juego;
         int contadorPuntajes = 0;
+        List<int> numeros = new List<int>();
         public Form1()
         {
             InitializeComponent();
@@ -33,12 +34,12 @@ namespace Examen
 
         private void BotonIngresar_Click(object sender, EventArgs e)
         {
-            if ((TNombreUsuario.Text == "")||(TNombreUsuario == null))
+            if ((TNombreUsuario.Text == "") || (TNombreUsuario == null))
             {
                 MessageBox.Show("Ingrese nombre de usuario");
                 return;
             }
-            else if (TNombreUsuario.Text.Length < 3 )
+            else if (TNombreUsuario.Text.Length < 3)
             {
                 MessageBox.Show("Ingrese a lo menos 3 caracteres");
                 return;
@@ -63,19 +64,50 @@ namespace Examen
                 {
                     string[] separados = item.ToString().Split(new char[0]);
                     string uso = separados[0];
-                    int numero =Int32.Parse(uso);
+                    int numero = Int32.Parse(uso);
+                    numeros.Add(numero);
                     if (numero >= juego.puntaje())
                     {
                         contadorPuntajes++;
+
                     }
                 }
                 if (contadorPuntajes < 10)
                 {
                     puntajes.Items.Add(juego.puntaje() + "\t" + TNombreUsuario.Text);
                     contadorPuntajes = 0;
+                    if (puntajes.Items.Count > 10)
+                    {
+                        int a = -1;
+                        int b = -1;
+                        int low = -1;
+                        foreach (int numero in numeros)
+                        {
+                            b = a;
+                            a = numero;
+
+                            if (b == -1)
+                            {
+                                continue;
+                            }
+                            if (a < b) low = a;
+                            else low = b;
+                        }
+                        foreach (object item in puntajes.Items)
+                        {
+                            string[] separados = item.ToString().Split(new char[0]);
+                            string uso = separados[0];
+                            int numero = Int32.Parse(uso);
+                            if (numero == low)
+                            {
+                                puntajes.Items.Remove(item);
+                                break;
+                            }
+                        }
+                        TNombreUsuario.Text = "";
+                        return;
+                    }
                 }
-                TNombreUsuario.Text = "";
-                return;
             }
         }
 
