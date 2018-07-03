@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace Examen
 {
@@ -135,24 +136,28 @@ namespace Examen
             if (Pacman.Bounds.IntersectsWith(barra_alta.Bounds))
             {
                 timer1.Stop();
+                playDeath();
                 MessageBox.Show("\tGAME OVER\n" + "Su puntaje es de: " + puntos + " Puntos");
                 this.Close();
             }
             else if (Pacman.Bounds.IntersectsWith(barra_izq.Bounds))
             {
                 timer1.Stop();
+                playDeath();
                 MessageBox.Show("\tGAME OVER\n" + "Su puntaje es de: " + puntos + " Puntos");
                 this.Close();
             }
             else if (Pacman.Bounds.IntersectsWith(barra_der.Bounds))
             {
                 timer1.Stop();
+                playDeath();
                 MessageBox.Show("\tGAME OVER\n" + "Su puntaje es de: " + puntos + " Puntos");
                 this.Close();
             }
             else if (Pacman.Bounds.IntersectsWith(barra_baja.Bounds))
             {
                 timer1.Stop();
+                playDeath();
                 MessageBox.Show("\tGAME OVER\n"+"Su puntaje es de: " + puntos + " Puntos");
                 this.Close();
             }
@@ -181,12 +186,14 @@ namespace Examen
             if (Pacman.Bounds.IntersectsWith(Pinky.Bounds))
             {
                 timer1.Stop();
+                playDeath();
                 MessageBox.Show("\tGAME OVER\n" + "Su puntaje es de: " + puntos + " Puntos");
                 this.Close();
             }
             if (Pacman.Bounds.IntersectsWith(redie.Bounds))
             {
                 timer1.Stop();
+                playDeath();
                 MessageBox.Show("\tGAME OVER\n" + "Su puntaje es de: " + puntos + " Puntos");
                 this.Close();
             }
@@ -213,6 +220,11 @@ namespace Examen
         public int puntaje()
         {
             return puntos;
+        }
+        private void playDeath()
+        {
+            SoundPlayer simpleSound = new SoundPlayer(@"..\..\..\..\pacman-die.wav");
+            simpleSound.Play();
         }
     }
 }
